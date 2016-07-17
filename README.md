@@ -10,9 +10,8 @@ Index page:
 
 ```php
 session_start();
-if (!isset($_SESSION["session variable name"])) {
+if (!isset($_SESSION["session variable name"]))
 	header("LOCATION: /login/");
-}
 ```
 
 Login page:
@@ -21,13 +20,11 @@ Login page:
 include("inc/billysteamauth/billysteamauth.php");
 $BillySteamAuth = new BillySteamAuth("session variable name");
 
-if (isset($BillySteamAuth -> SteamID)) {
+if (isset($BillySteamAuth -> SteamID))
 	header("LOCATION: /");
-}
 
-if (isset($_POST["login"]) && !isset($_SESSION["session variable name"])) {
+if (isset($_POST["login"]) && !isset($_SESSION["session variable name"]))
 	header("LOCATION: " . $BillySteamAuth -> LoginURL());
-}
 ```
 
 ##Other Functions
@@ -40,15 +37,12 @@ Returns `$_SERVER["REQUEST_URI"]` without the OpenID `$_GET` variables.
 include("inc/billysteamauth/billysteamauth.php");
 $BillySteamAuth = new BillySteamAuth("session variable name");
 
-if (isset($BillySteamAuth -> SteamID)) {
+if (isset($BillySteamAuth -> SteamID))
 	header("LOCATION: /");
-}
 
-if (isset($_POST["login"]) && !isset($_SESSION["session variable name"])) {
+if (isset($_POST["login"]) && !isset($_SESSION["session variable name"]))
 	header("LOCATION: " . $BillySteamAuth -> LoginURL());
-}
 
-if (isset($_GET["openid_identity"])) {
+if (isset($_GET["openid_identity"]))
 	header("LOCATION: //" . $_SERVER["HTTP_HOST"] . "/" . $BillySteamAuth -> StripOpenID());
-}
 ```
