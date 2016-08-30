@@ -1,16 +1,19 @@
 <?php
 	if (session_status() == PHP_SESSION_NONE)
 	    session_start();
-	
+
 	class BillySteamAuth {
+		public $sessionname;
+
 		public function __construct($sessionname = "steamid") {
+			$this -> sessionname = $sessionname;
 			if (isset($_SESSION[$sessionname])) {
 				$this -> SteamID = $_SESSION[$sessionname];
 			} else {
 				require("openid.php");
 				$this -> openid = new LightOpenID($_SERVER["HTTP_HOST"]);
 				$this -> openid -> identity = "https://steamcommunity.com/openid";
-				
+
 				if ($this -> openid -> mode) {
 					if ($this -> openid -> validate()) {
 						$this -> SteamID = basename($this -> openid -> identity);
@@ -19,15 +22,19 @@
 				}
 			}
 		}
-		
+
 		public function LoginURL() {
 			return $this -> openid -> authUrl();
 		}
-		
+
+		public function Logout() {
+			unset($_SESSION[$this -> sessionname]);
+		}
+
 		public function StripOpenID($get = null) {
 			if (!$get)
 				$get = $_GET;
-				
+
 			$OpenID = [
 				"openid_ns",
 				"openid_mode",
@@ -40,7 +47,7 @@
 				"openid_signed",
 				"openid_sig",
 			];
-			
+
 			$builduri = "";
 			foreach($get as $key => $value) {
 				if (!in_array($key,$OpenID)) {
@@ -48,7 +55,7 @@
 						$builduri = "?";
 					else
 						$builduri .= "&";
-						
+
 					$builduri .= $key . "=" . $value;
 				}
 			}
