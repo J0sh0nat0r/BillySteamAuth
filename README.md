@@ -33,6 +33,10 @@ if (isset($_POST["login"]) && !isset($_SESSION["session variable name"]))
 
 Returns `$_SERVER["REQUEST_URI"]` without the OpenID `$_GET` variables.
 
+`Logout`
+
+Unsets the session variable which logs the user out.
+
 ```php
 include("inc/billysteamauth/billysteamauth.php");
 $BillySteamAuth = new BillySteamAuth("session variable name");
@@ -45,4 +49,9 @@ if (isset($_POST["login"]) && !isset($_SESSION["session variable name"]))
 
 if (isset($_GET["openid_identity"]))
 	header("LOCATION: //" . $_SERVER["HTTP_HOST"] . "/" . $BillySteamAuth -> StripOpenID());
+	
+if (isset($_GET["logout"])) {
+	$BillySteamAuth -> Logout();
+	header("LOCATION: /");
+}
 ```
