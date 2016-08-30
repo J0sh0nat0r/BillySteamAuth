@@ -37,6 +37,8 @@ Returns `$_SERVER["REQUEST_URI"]` without the OpenID `$_GET` variables.
 
 Unsets the session variable which logs the user out.
 
+##Full example
+
 ```php
 include("inc/billysteamauth/billysteamauth.php");
 $BillySteamAuth = new BillySteamAuth("session variable name");
