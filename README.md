@@ -1,10 +1,10 @@
 BillySteamAuth is the tiniest PHP Steam Authenticator and works everywhere.
 
-##Usage
+## Usage
 
 Create a new directory anywhere you want and add `billysteamauth.php` and `openid.php` to it.
 
-##Example
+## Example
 
 Index page:
 
@@ -27,7 +27,7 @@ if (isset($_POST["login"]) && !isset($_SESSION["session variable name"]))
 	header("LOCATION: " . $BillySteamAuth -> LoginURL());
 ```
 
-##Other Functions
+## Other Functions
 
 `StripOpenID`
 
@@ -37,7 +37,7 @@ Returns `$_SERVER["REQUEST_URI"]` without the OpenID `$_GET` variables.
 
 Unsets the session variable which logs the user out.
 
-##Full example
+## Full example
 
 ```php
 include("inc/billysteamauth/billysteamauth.php");
